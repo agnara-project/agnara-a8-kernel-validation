@@ -37,6 +37,9 @@ jobs:
     - name: python -m pip check
       run: python -m pip check
 
+    - name: module import smoke
+      run: python -c "import refund_service; print(refund_service.__file__)"
+
     - name: ruff format --check .
       run: ruff format --check .
 

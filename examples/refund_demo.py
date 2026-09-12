@@ -4,7 +4,7 @@ from importlib.metadata import version
 from agnara import ConfirmationEvidence, Principal
 from agnara.execution import Success
 
-from src.refund_service import run_refund
+from refund_service import run_refund
 
 
 async def main():

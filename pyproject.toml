@@ -36,7 +36,6 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["."]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 
@@ -50,3 +49,6 @@ ignore = []
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/refund_service.py"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""

@@ -4,7 +4,7 @@ import pytest
 from agnara import ConfirmationEvidence, Principal
 from agnara.execution import Failure, FailureCode, Success
 
-from src.refund_service import PaymentGateway, run_refund
+from refund_service import PaymentGateway, run_refund
 
 
 class MockGateway(PaymentGateway):

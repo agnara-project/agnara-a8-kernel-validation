@@ -29,7 +29,12 @@ This file is the single operational source of truth for autonomous coding agents
 This project verifies public APIs of Agnara 0.1.0a8. Any undocumented requirement (like `DIRegistry` not being exposed publicly) is treated as a gap and documented.
 
 ## 6. Negative Constraints
-- **DO NOT** upgrade `agnara`.
+- **DO NOT** upgrade beyond a8.
+- **DO NOT** make changes to Agnara source.
+- **DO NOT** use local Agnara dependencies.
+- **DO NOT** hide gaps or mock unexpected failures to pretend they don't exist.
+- **DO NOT** introduce new private Agnara imports without documenting them in `docs/public-api-boundary.md`.
+- **DO NOT** claim coverage or features beyond the tested scope.
 - **DO NOT** replace PyPI dependencies with local paths.
 - **DO NOT** weaken assertions.
 
@@ -39,6 +44,15 @@ Branching: `feature/` -> `main`.
 
 ## 8. Documentation Synchronization Contract
 Changes to `src/refund_service.py` must be reflected in `README.md` gaps and `docs/public-api-boundary.md`.
+CI and AGENTS must remain consistent.
 
 ## 9. Definition of Done
-Passes all gates: `ruff format --check .`, `ruff check .`, `pytest tests/`.
+Passes all gates: 
+```bash
+python -m pip check
+ruff format --check .
+ruff check .
+pytest -v
+python examples/refund_demo.py
+python -m build
+```

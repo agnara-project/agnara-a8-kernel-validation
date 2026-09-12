@@ -23,6 +23,10 @@ class MockGateway(PaymentGateway):
 
 @pytest.mark.asyncio
 async def test_successful_refund():
+    from importlib.metadata import version
+
+    assert version("agnara") == "0.1.0a8", "Must validate exactly 0.1.0a8"
+
     gateway = MockGateway()
     principal = Principal("user1", scopes=["refund:execute"])
     evidence = ConfirmationEvidence("CONFIRM_REFUND")

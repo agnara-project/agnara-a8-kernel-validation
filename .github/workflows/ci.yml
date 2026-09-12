@@ -8,20 +8,46 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: Validation on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.14"]
+
     steps:
-    - uses: actions/checkout@v7
+    - name: Checkout
+      uses: actions/checkout@v7
     
-    - name: Set up Python
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v7
       with:
-        python-version: "3.14"
+        python-version: ${{ matrix.python-version }}
         
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e ".[test]"
-        
-    - name: Run tests
-      run: |
-        PYTHONPATH=. pytest tests/
+    - name: Upgrade pip
+      run: python -m pip install --upgrade pip
+      
+    - name: Install project + dev dependencies
+      run: python -m pip install -e ".[dev,test]"
+
+    - name: Verify installed Agnara version
+      run: python -c "from importlib.metadata import version; assert version('agnara') == '0.1.0a8'"
+
+    - name: python -m pip check
+      run: python -m pip check
+
+    - name: ruff format --check .
+      run: ruff format --check .
+
+    - name: ruff check .
+      run: ruff check .
+
+    - name: pytest -v
+      run: pytest -v tests/
+
+    - name: kernel smoke scenario
+      run: python examples/refund_demo.py
+
+    - name: build verification
+      run: python -m build

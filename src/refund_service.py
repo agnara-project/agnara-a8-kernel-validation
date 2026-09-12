@@ -139,8 +139,5 @@ async def run_refund(
     app_descriptor = describe_app(kernel, [plan], dependencies=di_registry)
     intro_snap = snapshot([app_descriptor])
 
-    try:
-        result = await invoke_result(plan, context)
-        return {"result": result, "telemetry": telemetry, "introspection": intro_snap}
-    except Exception as e:
-        return {"error": e, "telemetry": telemetry, "introspection": intro_snap}
+    result = await invoke_result(plan, context)
+    return {"result": result, "telemetry": telemetry, "introspection": intro_snap}

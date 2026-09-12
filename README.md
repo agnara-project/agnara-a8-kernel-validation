@@ -12,7 +12,7 @@ This repository provides a reproducible, point-in-time conformance validation of
 - Capability declaration, compilation, and lookup.
 - Dependency injection via DI Registry and Containers.
 - Execution plans and execution contexts.
-- Principles, scopes, risks, and standard effects.
+- Principals, scopes, risks, and standard effects.
 - Confirmations (evidence/verifiers) correctly blocking side-effects.
 - Canonical `Success`/`Failure` outcome extraction.
 - Timeout and invalid input handling.

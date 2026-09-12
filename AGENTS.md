@@ -23,7 +23,7 @@ This file is the single operational source of truth for autonomous coding agents
 - Install: `uv venv --python 3.14 .venv && uv pip install -e ".[dev,test]" --python .venv`
 - Format: `ruff format .`
 - Lint: `ruff check .`
-- Test: `PYTHONPATH=. pytest tests/`
+- Test: `pytest -v tests/`
 
 ## 5. Public API / Integration Boundary
 This project verifies public APIs of Agnara 0.1.0a8. Any undocumented requirement (like `DIRegistry` not being exposed publicly) is treated as a gap and documented.
